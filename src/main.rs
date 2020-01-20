@@ -9,7 +9,7 @@ use std::time::Duration;
 use modules::*;
 use modules::{
     bspwm::Bspwm, cpu::Cpu, pamixer::Pamixer, ram::Ram, spacer::Spacer, time::Time,
-    weather::Weather,
+    weather::Weather, playerctl::Playerctl,
 };
 
 fn flatten(msgs: Vec<Message>) -> String {
@@ -36,8 +36,7 @@ fn main() {
 
     // Add your modules here
     let left: Vec<Box<dyn Module>> = vec![Box::new(Bspwm { aliases: desktops })];
-    // Add your modules here
-    let center: Vec<Box<dyn Module>> = vec![];
+    let center: Vec<Box<dyn Module>> = vec![Box::new(Playerctl)];
     let right: Vec<Box<dyn Module>> = vec![
         Box::new(Weather::new(owm_app_key, 3461786)),
         Box::new(Spacer),
