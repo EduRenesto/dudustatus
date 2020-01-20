@@ -1,4 +1,4 @@
-use super::{Module, Message};
+use super::{Message, Module};
 
 use crate::colors;
 
@@ -14,15 +14,14 @@ impl Module for Time {
                 text: " \u{e9fe}".to_string(),
                 bg: None,
                 fg: None,
-                underline: Some((colors::gruvbox::NEUTRAL_RED, 255))
+                underline: Some((colors::gruvbox::NEUTRAL_RED, 255)),
             },
-
             Message {
                 text: today.format("%H:%M %d/%m/%y "),
                 bg: None,
                 fg: None,
-                underline: Some((colors::gruvbox::NEUTRAL_RED, 255))
-            }
+                underline: Some((colors::gruvbox::NEUTRAL_RED, 255)),
+            },
         ]
     }
 }

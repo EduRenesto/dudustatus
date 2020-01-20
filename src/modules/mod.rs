@@ -1,11 +1,11 @@
 use std::fmt;
 
+pub mod bspwm;
+pub mod cpu;
+pub mod pamixer;
+pub mod ram;
 pub mod spacer;
 pub mod time;
-pub mod bspwm;
-pub mod pamixer;
-pub mod cpu;
-pub mod ram;
 pub mod weather;
 
 /// Encapsulates a message.
@@ -15,7 +15,6 @@ pub struct Message {
 
     ///// The font index used for this message
     //font: u8,
-
     /// The background color
     bg: Option<(&'static str, u8)>,
 

@@ -34,7 +34,7 @@ impl Module for Ram {
             text: format!(" \u{e94d} {:02}% ", usage),
             fg: None,
             bg: None,
-            underline: Some((colors::gruvbox::BRIGHT_BLUE, 255))
+            underline: Some((colors::gruvbox::BRIGHT_BLUE, 255)),
         }]
     }
 }

@@ -1,10 +1,10 @@
 use std::process::{Command, Stdio};
 
+use super::{Message, Module};
 use crate::colors;
-use super::{Module, Message};
 
 pub struct Bspwm {
-    pub aliases: Vec<(String, String)>
+    pub aliases: Vec<(String, String)>,
 }
 
 impl Module for Bspwm {
@@ -32,7 +32,7 @@ impl Module for Bspwm {
                 text: " ".to_string(),
                 fg: None,
                 bg: None,
-                underline: None
+                underline: None,
             });
 
             if desktop == active {
@@ -40,14 +40,14 @@ impl Module for Bspwm {
                     text: name.clone(),
                     fg: None,
                     bg: None,
-                    underline: Some((colors::gruvbox::BRIGHT_RED, 255))
+                    underline: Some((colors::gruvbox::BRIGHT_RED, 255)),
                 })
             } else {
                 ret.push(Message {
                     text: name.clone(),
                     fg: None,
                     bg: None,
-                    underline: None
+                    underline: None,
                 })
             }
         }

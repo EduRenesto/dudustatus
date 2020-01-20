@@ -1,4 +1,4 @@
-use super::{Module, Message};
+use super::{Message, Module};
 
 pub struct Spacer;
 
@@ -8,7 +8,7 @@ impl Module for Spacer {
             text: " ".to_string(),
             bg: None,
             fg: None,
-            underline: None
+            underline: None,
         }]
     }
 }

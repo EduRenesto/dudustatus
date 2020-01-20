@@ -1,25 +1,19 @@
-mod modules;
 mod colors;
+mod modules;
 
-use std::process::{Command, Stdio};
-use std::io::Write;
 use std::env;
+use std::io::Write;
+use std::process::{Command, Stdio};
 use std::time::Duration;
 
 use modules::*;
 use modules::{
-    spacer::Spacer,
-    time::Time,
-    bspwm::Bspwm,
-    pamixer::Pamixer,
-    cpu::Cpu,
-    ram::Ram,
-    weather::Weather
+    bspwm::Bspwm, cpu::Cpu, pamixer::Pamixer, ram::Ram, spacer::Spacer, time::Time,
+    weather::Weather,
 };
 
 fn flatten(msgs: Vec<Message>) -> String {
-    msgs
-        .iter()
+    msgs.iter()
         .map(|m| m.to_string())
         .collect::<Vec<String>>()
         .join(" ")
@@ -41,15 +35,9 @@ fn main() {
     let owm_app_key = env::var("OWM_APP_KEY").unwrap_or("".to_string());
 
     // Add your modules here
-    let left: Vec<Box<dyn Module>> = vec![
-        Box::new(Bspwm {
-            aliases: desktops
-        })
-    ];
+    let left: Vec<Box<dyn Module>> = vec![Box::new(Bspwm { aliases: desktops })];
     // Add your modules here
-    let center: Vec<Box<dyn Module>> = vec![
-
-    ];
+    let center: Vec<Box<dyn Module>> = vec![];
     let right: Vec<Box<dyn Module>> = vec![
         Box::new(Weather::new(owm_app_key, 3461786)),
         Box::new(Spacer),
@@ -59,7 +47,7 @@ fn main() {
         Box::new(Spacer),
         Box::new(Pamixer),
         Box::new(Spacer),
-        Box::new(Time)
+        Box::new(Time),
     ];
 
     let mut proc = Command::new("lemonbar")

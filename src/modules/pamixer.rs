@@ -38,7 +38,7 @@ impl Module for Pamixer {
             text: format!(" {} {}% ", icon, vol),
             fg: Some((color, 255)),
             bg: None,
-            underline: Some((colors::gruvbox::BRIGHT_GREEN, 255))
+            underline: Some((colors::gruvbox::BRIGHT_GREEN, 255)),
         }]
     }
 }

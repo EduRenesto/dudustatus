@@ -34,7 +34,7 @@ impl Module for Cpu {
             text: format!(" \u{e900} {:02}% ", usage),
             fg: None,
             bg: None,
-            underline: Some((colors::gruvbox::BRIGHT_PURPLE, 255))
+            underline: Some((colors::gruvbox::BRIGHT_PURPLE, 255)),
         }]
     }
 }
