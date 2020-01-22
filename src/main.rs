@@ -39,7 +39,7 @@ fn main() {
         Box::new(Spacer),
         Box::new(Bspwm { aliases: desktops })
     ];
-    let center: Vec<Box<dyn Module>> = vec![Box::new(Spotify)];
+    let center: Vec<Box<dyn Module>> = vec![Box::new(Spotify::new())];
     let right: Vec<Box<dyn Module>> = vec![
         Box::new(Weather::new(owm_app_key, 3461786)),
         Box::new(Spacer),
