@@ -1,5 +1,5 @@
-use std::process::{Command, Stdio};
 use std::collections::HashMap;
+use std::process::{Command, Stdio};
 
 use std::sync::{Arc, RwLock};
 
@@ -14,7 +14,7 @@ use crate::colors;
 /// and wait for its output separately from the bar.
 pub struct Spotify {
     current_title: Arc<RwLock<String>>,
-    current_artist: Arc<RwLock<String>>
+    current_artist: Arc<RwLock<String>>,
 }
 
 impl Spotify {
@@ -38,7 +38,9 @@ impl Spotify {
                     .unwrap();
 
                 let ret = sp.wait_with_output().unwrap();
-                let ret = String::from_utf8_lossy(ret.stdout.as_slice()).trim().to_owned();
+                let ret = String::from_utf8_lossy(ret.stdout.as_slice())
+                    .trim()
+                    .to_owned();
 
                 let mut data = HashMap::new();
 
@@ -50,9 +52,9 @@ impl Spotify {
                     let mut it = metadata.split("|");
 
                     if let Some(key) = it.next() {
-                        let val = it.next().expect("sp returned key but not value, wtf!");
-
-                        data.insert(key, val);
+                        if let Some(val) = it.next() {
+                            data.insert(key, val);
+                        }
                     }
                 }
 
@@ -72,7 +74,7 @@ impl Spotify {
 
         Spotify {
             current_title: title,
-            current_artist: artist
+            current_artist: artist,
         }
     }
 }

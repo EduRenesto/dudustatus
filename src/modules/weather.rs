@@ -1,8 +1,7 @@
 use super::{Message, Module};
 use crate::colors;
 
-use std::cell::{Cell, RefCell};
-use std::time::{Duration, Instant};
+use std::time::Duration;
 
 use std::sync::{Arc, RwLock};
 use std::thread;
@@ -26,7 +25,7 @@ impl Weather {
             current_forecast: Arc::new(RwLock::new(Forecast {
                 description: "no data :(".to_string(),
                 icon: "50d".to_string(),
-                temp: 0.0
+                temp: 0.0,
             })),
         };
 
@@ -37,14 +36,11 @@ impl Weather {
         let forecast = weather.current_forecast.clone();
         thread::spawn(move || {
             loop {
-                let url = format!(
-                    "{}/weather/?id={}&appid={}",
-                    OWM_API_URL, city_id, api_key
-                );
+                let url = format!("{}/weather/?id={}&appid={}", OWM_API_URL, city_id, api_key);
 
                 if let Ok(data) = reqwest::blocking::get(&url) {
-                    let parsed: serde_json::Value =
-                        serde_json::from_reader(data).expect("Failed to parse data from OpenWeatherMap");
+                    let parsed: serde_json::Value = serde_json::from_reader(data)
+                        .expect("Failed to parse data from OpenWeatherMap");
 
                     let desc = parsed
                         .pointer("/weather/0/description")
@@ -62,9 +58,9 @@ impl Weather {
                     forecast_ptr.temp = temp;
 
                     //self.current_forecast.replace(Some(Forecast {
-                        //description: desc,
-                        //icon: icon.to_owned(),
-                        //temp: temp,
+                    //description: desc,
+                    //icon: icon.to_owned(),
+                    //temp: temp,
                     //}));
 
                     //self.last_update.replace(Instant::now());
@@ -82,7 +78,7 @@ impl Module for Weather {
     fn render(&self) -> Vec<Message> {
         let mut ret = Vec::new();
 
-        let forecast = self.current_forecast.read().unwrap(); 
+        let forecast = self.current_forecast.read().unwrap();
         let icon = match forecast.icon.as_str() {
             "01d" | "02d" => "\u{ed97}",                 // sun
             "01n" | "02n" => "\u{e99a}",                 // moon
