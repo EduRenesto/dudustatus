@@ -3,9 +3,9 @@ use std::fmt;
 pub mod bspwm;
 pub mod cpu;
 pub mod pamixer;
-pub mod playerctl;
 pub mod ram;
 pub mod spacer;
+pub mod spotify;
 pub mod time;
 pub mod weather;
 

@@ -9,7 +9,7 @@ use std::time::Duration;
 use modules::*;
 use modules::{
     bspwm::Bspwm, cpu::Cpu, pamixer::Pamixer, ram::Ram, spacer::Spacer, time::Time,
-    weather::Weather, playerctl::Playerctl,
+    weather::Weather, spotify::Spotify,
 };
 
 fn flatten(msgs: Vec<Message>) -> String {
@@ -35,8 +35,11 @@ fn main() {
     let owm_app_key = env::var("OWM_APP_KEY").unwrap_or("".to_string());
 
     // Add your modules here
-    let left: Vec<Box<dyn Module>> = vec![Box::new(Bspwm { aliases: desktops })];
-    let center: Vec<Box<dyn Module>> = vec![Box::new(Playerctl)];
+    let left: Vec<Box<dyn Module>> = vec![
+        Box::new(Spacer),
+        Box::new(Bspwm { aliases: desktops })
+    ];
+    let center: Vec<Box<dyn Module>> = vec![Box::new(Spotify)];
     let right: Vec<Box<dyn Module>> = vec![
         Box::new(Weather::new(owm_app_key, 3461786)),
         Box::new(Spacer),
@@ -55,7 +58,7 @@ fn main() {
         .arg("-g")
         .arg("x30")
         .arg("-f")
-        .arg("Overpass-9")
+        .arg("Iosevka-9")
         .arg("-f")
         .arg("icomoon\\-feather-12")
         .arg("-B")

@@ -27,24 +27,16 @@ impl Module for Bspwm {
         let mut ret = Vec::new();
 
         for (desktop, name) in self.aliases.iter() {
-            // Add a spacer
-            ret.push(Message {
-                text: " ".to_string(),
-                fg: None,
-                bg: None,
-                underline: None,
-            });
-
             if desktop == active {
                 ret.push(Message {
-                    text: name.clone(),
+                    text: format!(" {} ", name),
                     fg: None,
                     bg: None,
                     underline: Some((colors::gruvbox::BRIGHT_RED, 255)),
                 })
             } else {
                 ret.push(Message {
-                    text: name.clone(),
+                    text: format!(" {} ", name),
                     fg: None,
                     bg: None,
                     underline: None,

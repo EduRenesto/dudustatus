@@ -93,7 +93,7 @@ impl Module for Weather {
             let temp = (forecast.temp - 273.15f32).round(); // celsius master race
 
             ret.push(Message {
-                text: format!(" {}  {}, {}ºC", icon, desc, temp),
+                text: format!(" {} {}, {}ºC", icon, desc, temp),
                 fg: None,
                 bg: None,
                 underline: Some((colors::gruvbox::BRIGHT_AQUA, 255)),
