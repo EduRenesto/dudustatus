@@ -1,5 +1,6 @@
 use std::fmt;
 
+pub mod battery;
 pub mod bspwm;
 pub mod cpu;
 pub mod nmcli;

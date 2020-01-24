@@ -32,7 +32,7 @@ impl Module for Nmcli {
             .unwrap_or("No connection");
 
         vec![Message {
-            text: format!(" \u{e9be} {:02}% ", conn),
+            text: format!(" \u{e9be} {} ", conn),
             fg: None,
             bg: None,
             underline: Some((colors::gruvbox::BRIGHT_YELLOW, 255)),
