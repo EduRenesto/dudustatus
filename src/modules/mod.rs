@@ -2,6 +2,7 @@ use std::fmt;
 
 pub mod bspwm;
 pub mod cpu;
+pub mod nmcli;
 pub mod pamixer;
 pub mod ram;
 pub mod spacer;
