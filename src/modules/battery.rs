@@ -1,24 +1,33 @@
 use std::process::{Command, Stdio};
 use std::fs;
 
+use serde::Deserialize;
+
 use super::{Message, Module};
 use crate::colors;
 
 /// Gets batttery status from sysfs
 pub struct Battery {
     charge_full: u32,
-    path: &'static str
+    path: String
+}
+
+#[derive(Deserialize)]
+pub struct Settings<'a> {
+    path: &'a str
 }
 
 impl Battery {
-    pub fn new(path: &'static str) -> Battery {
+    pub fn new<'a>(settings: Option<Settings<'a>>) -> Battery {
+        let path: &'a str = settings.expect("The battery module needs configuration!").path;
+
         let full = fs::read_to_string(format!("{}/charge_full", path))
             .unwrap_or("1".to_owned());
         let charge_full = full.trim().parse::<u32>().unwrap();
 
         Battery {
             charge_full,
-            path
+            path: path.to_owned()
         }
     }
 }

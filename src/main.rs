@@ -1,5 +1,6 @@
 mod colors;
 mod modules;
+mod config;
 
 use std::env;
 use std::io::Write;
@@ -17,6 +18,17 @@ fn flatten(msgs: Vec<Message>) -> String {
         .map(|m| m.to_string())
         .collect::<Vec<String>>()
         .join(" ")
+}
+
+fn create_module(name: &str) -> Box<dyn Module> {
+    match name {
+        //"bspwm" => Box::new(Bspwm),
+        "ram" => Box::new(Ram),
+        "cpu" => Box::new(Cpu),
+        "pamixer" => Box::new(Pamixer),
+        "time" => Box::new(Time),
+        s => panic!("Unknown module {}", s)
+    }
 }
 
 fn main() {
