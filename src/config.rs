@@ -1,14 +1,14 @@
 use serde::Deserialize;
 
 /// The position of the bar in the screen
-#[derive(Deserialize)]
+#[derive(Copy, Clone, Deserialize)]
 pub enum Position {
     Top,
     Bottom
 }
 
 /// Describes the geometry of the bar.
-#[derive(Deserialize)]
+#[derive(Copy, Clone, Deserialize)]
 pub struct Geometry {
     pub width: u32,
     pub height: u32,
@@ -17,7 +17,7 @@ pub struct Geometry {
 }
 
 #[derive(Deserialize)]
-pub struct Config {
+pub struct Config<'a> {
     pub default_update_interval: f32,
 
     pub fonts: Vec<(String, u8)>,
@@ -28,4 +28,7 @@ pub struct Config {
 
     pub position: Position,
     pub geometry: Geometry,
+
+    pub battery: crate::modules::battery::Settings,
+    pub bspwm: crate::modules::bspwm::Settings,
 }

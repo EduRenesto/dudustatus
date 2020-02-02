@@ -4,21 +4,29 @@ use std::fs;
 use serde::Deserialize;
 
 use super::{Message, Module};
-use crate::colors;
+use crate::colors::{self, Color};
 
 /// Gets batttery status from sysfs
-pub struct Battery {
+pub struct Battery<'a> {
     charge_full: u32,
-    path: String
+    path: String,
+    settings: Option<Settings<'a>>
 }
 
-#[derive(Deserialize)]
+/// Note: all the colors refer to the texture atlas.
+#[derive(Deserialize, Copy, Clone)]
 pub struct Settings<'a> {
-    path: &'a str
+    /// The path to the sysfs node
+    path: &'a str,
+
+    underline: &'a str,
+    overline: &'a str,
+    fg: &'a str,
+    bg: &'a str
 }
 
-impl Battery {
-    pub fn new<'a>(settings: Option<Settings<'a>>) -> Battery {
+impl<'a> Battery<'a> {
+    pub fn new(settings: Option<Settings<'a>>) -> Battery<'a> {
         let path: &'a str = settings.expect("The battery module needs configuration!").path;
 
         let full = fs::read_to_string(format!("{}/charge_full", path))
@@ -27,12 +35,13 @@ impl Battery {
 
         Battery {
             charge_full,
-            path: path.to_owned()
+            path: path.to_owned(),
+            settings
         }
     }
 }
 
-impl Module for Battery {
+impl<'a> Module for Battery<'a> {
     fn render(&self) -> Vec<Message> {
         let cur = fs::read_to_string(format!("{}/charge_now", self.path))
             .unwrap_or("0".to_owned());

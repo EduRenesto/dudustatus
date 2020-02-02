@@ -3,8 +3,15 @@ use std::process::{Command, Stdio};
 use super::{Message, Module};
 use crate::colors;
 
+use serde::Deserialize;
+
 pub struct Bspwm {
     pub aliases: Vec<(String, String)>,
+}
+
+#[derive(Deserialize)]
+pub struct Settings {
+    aliases: Vec<(String, String)>
 }
 
 impl Module for Bspwm {
