@@ -34,8 +34,12 @@ impl Spotify {
                     .stdin(Stdio::null())
                     .stdout(Stdio::piped())
                     .arg("metadata")
-                    .spawn()
-                    .unwrap();
+                    .spawn();
+
+                let sp = match sp {
+                    Ok(sp) => sp,
+                    Err(_) => { continue; }
+                };
 
                 let ret = sp.wait_with_output().unwrap();
                 let ret = String::from_utf8_lossy(ret.stdout.as_slice())
@@ -85,7 +89,12 @@ impl Module for Spotify {
         let title = self.current_title.read().unwrap();
 
         vec![Message {
-            text: format!(" \u{e99e} {} - {} ", artist, title),
+            text: " \u{e99e}".to_string(),
+            fg: Some((colors::gruvbox::BRIGHT_PURPLE, 255)),
+            bg: None,
+            underline: Some((colors::gruvbox::BRIGHT_PURPLE, 255)),
+        }, Message {
+            text: format!(" {} - {} ", artist, title),
             fg: None,
             bg: None,
             underline: Some((colors::gruvbox::BRIGHT_PURPLE, 255)),

@@ -31,7 +31,12 @@ impl Module for Ram {
             .round();
 
         vec![Message {
-            text: format!(" \u{e94d} {:02}% ", usage),
+            text: " \u{e94d}".to_string(),
+            fg: Some((colors::gruvbox::BRIGHT_BLUE, 255)),
+            bg: None,
+            underline: Some((colors::gruvbox::BRIGHT_BLUE, 255)),
+        }, Message {
+            text: format!(" {:02}% ", usage),
             fg: None,
             bg: None,
             underline: Some((colors::gruvbox::BRIGHT_BLUE, 255)),

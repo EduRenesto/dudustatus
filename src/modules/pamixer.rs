@@ -35,7 +35,12 @@ impl Module for Pamixer {
         };
 
         vec![Message {
-            text: format!(" {} {}% ", icon, vol),
+            text: format!(" {}", icon),
+            fg: Some((colors::gruvbox::BRIGHT_GREEN, 255)),
+            bg: None,
+            underline: Some((colors::gruvbox::BRIGHT_GREEN, 255)),
+        }, Message {
+            text: format!(" {}% ", vol),
             fg: Some((color, 255)),
             bg: None,
             underline: Some((colors::gruvbox::BRIGHT_GREEN, 255)),

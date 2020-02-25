@@ -31,7 +31,12 @@ impl Module for Cpu {
             .round();
 
         vec![Message {
-            text: format!(" \u{e900} {:02}% ", usage),
+            text: " \u{e900}".to_string(),
+            fg: Some((colors::gruvbox::BRIGHT_PURPLE, 255)),
+            bg: None,
+            underline: Some((colors::gruvbox::BRIGHT_PURPLE, 255)),
+        }, Message {
+            text: format!(" {:02}% ", usage),
             fg: None,
             bg: None,
             underline: Some((colors::gruvbox::BRIGHT_PURPLE, 255)),

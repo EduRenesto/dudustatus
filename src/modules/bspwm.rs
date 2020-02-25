@@ -30,7 +30,7 @@ impl Module for Bspwm {
             if desktop == active {
                 ret.push(Message {
                     text: format!(" {} ", name),
-                    fg: None,
+                    fg: Some((colors::gruvbox::BRIGHT_RED, 255)),
                     bg: None,
                     underline: Some((colors::gruvbox::BRIGHT_RED, 255)),
                 })

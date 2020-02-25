@@ -13,7 +13,7 @@ impl Module for Time {
             Message {
                 text: " \u{e9fe}".to_string(),
                 bg: None,
-                fg: None,
+                fg: Some((colors::gruvbox::NEUTRAL_RED, 255)),
                 underline: Some((colors::gruvbox::NEUTRAL_RED, 255)),
             },
             Message {
